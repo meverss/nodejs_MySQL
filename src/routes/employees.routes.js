@@ -3,15 +3,11 @@ import { getEmployees, getOneEmployee, addEmployees, updateAllEmployee, updateRe
 
 const router = Router()
 
-router.get('/', (req, res) => {
-    res.send('You are in ROOT directory')
-})
-
 router.get('/employees', getEmployees)
 router.get('/employees/:id', getOneEmployee)
 router.post('/employees', addEmployees)
-router.put('/employees', updateAllEmployee)
-router.patch('/employees', updateRecordEmployee)
-router.delete('/employees', deleteEmployee)
+router.put('/employees/:id', updateAllEmployee)
+router.patch('/employees/:id', updateRecordEmployee)
+router.delete('/employees/:id', deleteEmployee)
 
 export default router   // Export ROUTER and can use any name to define it when imported
