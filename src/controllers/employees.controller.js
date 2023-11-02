@@ -12,7 +12,7 @@ export const getOneEmployee = async (req, res) => {
 }
 
 export const addEmployees = async (req, res) => {
-    const {name, salary} = req.body
+    const { name, salary } = req.body
     const [sql] = await pool.query(`INSERT INTO employees (name, salary) VALUES ("${name}", "${salary}")`)
     console.log(`Added new employee ${name} with a salary of $${salary}`)
     res.json({
@@ -22,14 +22,24 @@ export const addEmployees = async (req, res) => {
     })
 }
 
-export const updateAllEmployee = (req, res) => {
+export const updateAllEmployee = async (req, res) => {
     res.send('Updatining ALL employee info')
 }
 
-export const updateRecordEmployee = (req, res) => {
+export const updateRecordEmployee = async (req, res) => {
     res.send(`Updating ONE employee's record`)
 }
 
-export const deleteEmployee = (req, res) => {
-    res.send('DELETING employee')
+export const deleteEmployee = async (req, res) => {
+    const id = req.params.id
+    const [db] = await pool.query(`SELECT * FROM employees`)
+    const [employee] = await pool.query(`SELECT (name) FROM employees WHERE id = ${id}`)
+    const [sql] = await pool.query(`DELETE FROM employees WHERE id = ${id}`)
+    if(sql.affectedRows >= 1){
+        console.log(`${employee[0].name} has been deleted from Employees`)
+        res.send(db)
+    } else {
+        console.log('No records found')
+        res.status(404).send('No records found')
+    }
 }

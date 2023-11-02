@@ -5,7 +5,7 @@ import employeesRoutes from './routes/employees.routes.js';
 const app = express();
 const PORT = process.env.port || 8080;
 
-// Handle JSON requests
+// Middlewares
 app.use(express.json())
 
 // Routes
