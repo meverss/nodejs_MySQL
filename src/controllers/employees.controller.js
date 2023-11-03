@@ -7,27 +7,29 @@ export const getEmployees = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({
-            mesage: 'Something went wrong'
+            message: 'Something went wrong'
         })
     }
 }
 
 export const getOneEmployee = async (req, res) => {
+    const { id } = req.params
+
     try {
-        const { id } = req.params
         const [sql] = await pool.query(`SELECT * FROM employees WHERE id = ${id}`)
         res.json(sql)
 
     } catch (error) {
         return res.status(500).json({
-            mesage: 'Something went wrong'
+            message: 'Something went wrong'
         })
     }
 }
 
 export const addEmployees = async (req, res) => {
+    const { name, salary } = req.body
+
     try {
-        const { name, salary } = req.body
         const [sql] = await pool.query(`INSERT INTO employees (name, salary) VALUES ('${name}', ${salary})`)
         if (sql.insertId >= 0) {
             console.log(`Added new employee ${name} with a salary of $${salary}`)
@@ -39,16 +41,17 @@ export const addEmployees = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({
-            mesage: 'Something went wrong'
+            message: 'Something went wrong'
         })
 
     }
 }
 
 export const updateAllEmployee = async (req, res) => {
+    const { name, salary } = req.body
+    const { id } = req.params
+
     try {
-        const { name, salary } = req.body
-        const { id } = req.params
         const [sql] = await pool.query(`UPDATE employees SET name = '${name}', salary = ${salary} WHERE id = ${id}`)
         if (sql.affectedRows >= 1) {
             console.log('Updated ALL employee info')
@@ -60,16 +63,17 @@ export const updateAllEmployee = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({
-            mesage: 'Something went wrong'
+            message: 'Something went wrong'
         })
 
     }
 }
 
 export const updateRecordEmployee = async (req, res) => {
+    const { name, salary } = req.body
+    const { id } = req.params
+    
     try {
-        const { name, salary } = req.body
-        const { id } = req.params
         const [sql] = await pool.query(`UPDATE employees SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ${id}`, [name, salary])
         if (sql.affectedRows >= 1) {
             console.log('Updated info')
@@ -81,16 +85,16 @@ export const updateRecordEmployee = async (req, res) => {
 
     } catch {
         return res.status(500).json({
-            mesage: 'Something went wrong'
+            message: 'Something went wrong'
         })
 
     }
 }
 
 export const deleteEmployee = async (req, res) => {
+    const { id } = req.params
 
     try {
-        const { id } = req.params
         const [db] = await pool.query(`SELECT * FROM employees`)
         const [employee] = await pool.query(`SELECT (name) FROM employees WHERE id = ${id}`)
         const [sql] = await pool.query(`DELETE FROM employees WHERE id = ${id}`)
@@ -104,7 +108,7 @@ export const deleteEmployee = async (req, res) => {
 
     } catch {
         return res.status(500).json({
-            mesage: 'Something went wrong'
+            message: 'Something went wrong'
         })
 
     }
