@@ -4,7 +4,6 @@ export const getEmployees = async (req, res) => {
     try {
         const [sql] = await pool.query(`SELECT * FROM employees`)
         res.json(sql)
-
     } catch (error) {
         return res.status(500).json({
             message: 'Something went wrong'
@@ -17,8 +16,14 @@ export const getOneEmployee = async (req, res) => {
 
     try {
         const [sql] = await pool.query(`SELECT * FROM employees WHERE id = ${id}`)
-        res.json(sql)
+        if(sql != ''){
+            res.json(sql[0])
+        } else{
+            res.status(404).json({
+                message: "Record not found"
+            })
 
+        }
     } catch (error) {
         return res.status(500).json({
             message: 'Something went wrong'
@@ -54,7 +59,7 @@ export const updateAllEmployee = async (req, res) => {
     try {
         const [sql] = await pool.query(`UPDATE employees SET name = '${name}', salary = ${salary} WHERE id = ${id}`)
         if (sql.affectedRows >= 1) {
-            console.log('Updated ALL employee info')
+            console.log(`Updated ALL employee's info`)
             res.sendStatus(204)
         } else {
             console.log('Record not found')
