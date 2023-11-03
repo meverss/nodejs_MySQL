@@ -1,20 +1,5 @@
 import { pool } from '../mysql_connector.js'
 
-export const validateRecord = async (req, res) => {
-    const { id } = req.params
-    const [sql] = await pool.query(`SELECT id FROM employees WHERE id = ${id}`)
-    if ([sql] != '') {
-        console.log(JSON.stringify(sql[0].id))
-        res.send(JSON.stringify(sql[0].id))
-    } else {
-        console.log(`Record with id=${id} doesn't exist`)
-        // res.status(404).send(`Record with id=${id} doesn't exist`)
-        res.status(404)
-        res.end(() => { return false })
-    }
-    console.log({ sql })
-}
-
 export const getEmployees = async (req, res) => {
     const [sql] = await pool.query(`SELECT * FROM employees`)
     res.json(sql)

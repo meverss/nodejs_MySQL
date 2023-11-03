@@ -1,11 +1,10 @@
 import { Router } from 'express'
-import { getEmployees, getOneEmployee, addEmployees, updateAllEmployee, updateRecordEmployee, deleteEmployee, validateRecord } from '../controllers/employees.controller.js'
+import { getEmployees, getOneEmployee, addEmployees, updateAllEmployee, updateRecordEmployee, deleteEmployee } from '../controllers/employees.controller.js'
 
 const router = Router()
 
 router.get('/employees', getEmployees)
 router.get('/employees/:id', getOneEmployee)
-router.get('/employees/validate/:id', validateRecord)
 router.post('/employees', addEmployees)
 router.put('/employees/:id', updateAllEmployee)
 router.patch('/employees/:id', updateRecordEmployee)
