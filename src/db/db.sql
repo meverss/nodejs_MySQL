@@ -14,3 +14,6 @@ INSERT INTO employees VALUES
 (2, 'Henry', 2000),
 (3, 'Sam', 500),
 (4, 'Max', 4150);
+
+CREATE USER 'marvin'@'localhost' IDENTIFIED BY 'mes2**';
+GRANT ALL ON [nombre de base de dato].[nombre de tabla] TO '[nombre usuario]'@'origen acceso';
