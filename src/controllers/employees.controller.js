@@ -19,10 +19,10 @@ export const getOneEmployee = async (req, res) => {
         if(sql != ''){
             res.json(sql[0])
         } else{
+            console.log('Record not found')
             res.status(404).json({
                 message: "Record not found"
             })
-
         }
     } catch (error) {
         return res.status(500).json({

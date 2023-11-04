@@ -1,6 +1,7 @@
 import express from 'express';
-import indexRoutes from './routes/index.routes.js';
-import employeesRoutes from './routes/employees.routes.js';
+import indexRoutes from './routes/index.routes.js'
+import employeesRoutes from './routes/employees.routes.js'
+import './config.js'
 
 const app = express();
 const PORT = process.env.port || 8080;
