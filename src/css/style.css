@@ -12,8 +12,9 @@
 }
 
 html {
-	font-family:Georgia, 'Times New Roman', Times, serif;
+	font-family:Fira Code, 'Times New Roman', Times, serif;
 	font-size: 62.5%;
+	color: #000;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	-ms-overflow-style: -ms-autohiding-scrollbar;
@@ -49,4 +50,15 @@ input, button {
 button:hover {
 	cursor: pointer;
 	transform: scale(1.1);
+}
+
+.msg_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.msg_box img{
+width: 300px;
 }
